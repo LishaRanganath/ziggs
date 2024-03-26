@@ -1,0 +1,47 @@
+<html>
+<head>
+<style>
+.main_cont
+{
+    border:2px solid black;
+    border-radius:5px;
+    margin: 30px;
+    padding-left:10%;
+    width:700px;
+    display:flex;
+    align-items: center; 
+    justify-content: space-between;
+    margin-left:27%;
+    
+}
+.main_cont .cont{
+    width:50%
+}
+.main_cont .btn{
+    margin-left: auto; 
+}
+</style>
+</head>
+<body>
+
+<% @menus.each do |menu| %>
+    <div class="main_cont">
+        <div class="cont">
+        <p> <%=menu.item_name%> </p>
+        <p> <%=menu.item_price%> </p>
+        </div>
+        <div class="btn">
+            <%= button_to "Add", menu_item_path,params:{menu_item_id: menu.id,restaurant_id: menu.restaurant.id},method: :post%>
+        </div> 
+        </div>
+<%end%>
+<div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @menus %>
+    </div>
+    <div class="center-a">
+    <%= will_paginate @menus, :container => false %>
+    <div>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+.main_cont
+{
+    border:2px solid black;
+    border-radius:5px;
+    margin: 30px;
+    padding-left:10%;
+    width:700px;
+    display:flex;
+    align-items: center; 
+    justify-content: space-between;
+    margin-left:27%;
+    
+}
+.main_cont .cont{
+    width:50%
+}
+.main_cont .btn{
+    margin-left: auto; 
+}

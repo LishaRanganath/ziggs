@@ -1,0 +1,63 @@
+<html>
+<head>
+<style>
+.main_cont
+{
+    border:2px solid black;
+    border-radius:5px;
+    margin: 30px;
+    padding-left:10%;
+    width:700px;
+    display:flex;
+    align-items: center; 
+    justify-content: space-between;
+    margin-left:27%;
+    
+}
+.main_cont .cont{
+    width:50%
+}
+.main_cont .btn{
+    margin-left: auto; 
+    
+    width:80px;
+}
+</style>
+</head>
+<body>
+<% if current_user && current_user.isadmin%>
+    <h1>hello Admin</h1>
+        <%@restaurant_all.each do |resto|%>
+        <div class="main_cont">
+            <div class="cont">
+                <p>Name:<%=resto.name%></p>
+                <p>Email:<%=resto.email%></p>
+                <p>Phone Number:<%=resto.phno%></p>
+            </div>
+            <div class="btn">
+                    <%= button_to "Select",menu_item_path, params:{id: resto.id}, method: :get%>
+            </div>
+            <div class="btn">
+                   <%= button_to "Edit"%>
+            </div>
+        </div>
+        <%end%>
+<%else%>
+    <% if user_signed_in?%>
+        <h1>hello <%=current_user.username%></h1>
+        <%@restaurant_all.each do |resto|%>
+        <div class="main_cont">
+            <div class="cont">
+                <p>Name:<%=resto.name%></p>
+                <p>Email:<%=resto.email%></p>
+                <p>Phone Number:<%=resto.phno%></p>
+            </div>
+            <div class="btn">
+                    <%= button_to "Select",menu_item_path, params:{id: resto.id}, method: :get%>
+                </div>
+        </div>
+        <%end%>
+    <%end%>
+<%end%>
+</body>
+</html>
