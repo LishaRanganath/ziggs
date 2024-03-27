@@ -6,9 +6,11 @@ class MainController < ApplicationController
   def new
     @resource=Restaurant.new
   end
-  #for creating a new restaurant
+
+  # Create a new restaurant
   def create
-    if MainCreator.create(restaurant_params)
+    restaurant = Main::RestaurantCreator.new(restaurant_params).create
+    if restaurant.errors.blank?
       redirect_to root_path, notice: "Restaurant added successfully"
     else
       render :new
@@ -16,7 +18,7 @@ class MainController < ApplicationController
   end
   #for destroying
   def destroy
-    if MainCreator.destroy(params[:id])
+    if Main::RestaurantManager.destroy(params[:id])
       redirect_to root_path, notice: "Restaurant deleted successfully"
     else
       redirect_to root_path, notice: "Could not delete Restaurant"
@@ -25,6 +27,6 @@ class MainController < ApplicationController
   #private methods
   private
   def restaurant_params
-    params.require(:restaurant).permit(:name, :email, :phno)
+    params.require(:restaurant).permit(:name, :email, :phno,:restaurant_image)
   end
 end
