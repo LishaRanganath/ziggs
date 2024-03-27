@@ -1,45 +1,30 @@
 <html>
 <head>
-<style>
-.main_cont
-{
-    border:2px solid black;
-    border-radius:5px;
-    margin: 30px;
-    padding-left:10%;
-    width:700px;
-    display:flex;
-    align-items: center; 
-    justify-content: space-between;
-    margin-left:27%;
-    
-}
-.main_cont .cont{
-    width:50%
-}
-.main_cont .btn{
-    margin-left: auto; 
-    
-    width:80px;
-}
-</style>
+<%= stylesheet_link_tag 'main', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
 <% if current_user && current_user.isadmin%>
     <h1>hello Admin</h1>
+    <%=button_to "Add Restaurant",new_main_path,method: :get%>
+
         <%@restaurant_all.each do |resto|%>
         <div class="main_cont">
             <div class="cont">
+                 <% if resto.restaurant_image.present? %>
+                    <%=  resto.restaurant_image %>
+                 <% else %>
+                    <p>No image available</p>
+                 <% end %>
                 <p>Name:<%=resto.name%></p>
                 <p>Email:<%=resto.email%></p>
                 <p>Phone Number:<%=resto.phno%></p>
             </div>
             <div class="btn">
-                    <%= button_to "Select",menu_item_path, params:{id: resto.id}, method: :get%>
+                    <%= button_to "Select",menu_item_path, params:{id: resto.id}, method: :get,class:"btn_in"%>
+                    <%= button_to "Edit",root_path,class:"btn_in"%>
+                    <%= button_to "Delete",main_path(resto),method: :delete,class:"btn_in"%>
             </div>
-            <div class="btn">
-                   <%= button_to "Edit"%>
-            </div>
+           
         </div>
         <%end%>
 <%else%>

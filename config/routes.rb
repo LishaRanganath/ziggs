@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  resources :main
   get 'menu_item',to:'menu_item#list'
   get 'profile',to: 'profile#show'
+
+  # get 'main',to: 'main#new'
 
  post 'menu_item',to:'cart_item#add'
   root 'main#index'
