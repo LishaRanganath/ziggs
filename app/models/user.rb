@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   attr_accessor :name
   attribute :isadmin, :boolean, default: false
-  has_many :carts
+  has_many :carts, dependent: :destroy
+  validates :email, presence: true, uniqueness: true
 end

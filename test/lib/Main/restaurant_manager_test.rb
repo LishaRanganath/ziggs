@@ -1,10 +1,27 @@
-require 'test/unit'
 require 'test_helper'
-require 'main/creator'
+require 'minitest/mock'
+require 'main/restaurant_creator'
 
-describe Main::Creator do
-    it 'delete the restaurant' do
-        restaurant=Restaurant.last.id
-        expect { Main::Creator.destroy(restaurant.id) }.to change { Restaurant.count }.by(-1)
-    end
+class RestaurantManagerTest < Minitest::Test
+  def setup
+    @restaurant_creator = Main::RestaurantCreator
+  end
+
+  def test_call_creator
+    params = { name: "olive", email: "olive@gmail.com", phno: 1236768 }
+    restaurant_class_mock = self.restaurant_class_mock()
+    restaurant_creator = @restaurant_creator.new(params, restaurant_class: restaurant_class_mock).create
+    assert assert restaurant_creator, "Restaurant creation passed"
+    assert_nil restaurant_creator.errors
+  end
+
+  private
+
+  def restaurant_class_mock
+    mock = Minitest::Mock.new
+    mock.expect(:new, mock, [{ name: "olive", email: "olive@gmail.com", phno: 1236768 }])
+    mock.expect(:errors, {}) # Stubbing errors method to return an empty hash
+    mock.expect(:save,true)
+    mock
+  end
 end

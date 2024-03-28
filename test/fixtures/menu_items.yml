@@ -6,6 +6,6 @@ one:
   restaurant: one
 
 two:
-  item_name: MyString
+  name: MyString
   item_price: 1
   restaurant: two
