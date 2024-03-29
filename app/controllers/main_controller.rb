@@ -28,6 +28,6 @@ class MainController < ApplicationController
   #private methods
   private
   def restaurant_params
-    params.require(:restaurant).permit(:name, :email, :phno)
+    params.require(:restaurant).permit(:name, :email, :phno,:restaurant_image)
   end
 end

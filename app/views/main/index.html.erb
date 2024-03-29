@@ -11,7 +11,7 @@
         <div class="main_cont">
             <div class="cont">
                  <% if resto.restaurant_image.present? %>
-                    <%= image_tag(url_for(resto.restaurant_image)) %>
+                     <%=image_tag url_for(resto.restaurant_image)%>
                  <% else %>
                     <p>No image available</p>
                  <% end %>

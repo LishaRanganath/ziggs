@@ -1,0 +1,20 @@
+<html>
+<head>
+<%= stylesheet_link_tag 'cart_item', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+
+<% @cart_items.each do |cart_item| %>
+    <div class="main_cont">
+        <div class="cont">
+        <p> <%=cart_item.menu_item.name%> </p>
+        <p> <%=cart_item.menu_item.item_price%> </p>
+        </div>
+        <div class="btn">
+            <%= button_to "+"%>
+            <%= button_to "-"%>
+        </div> 
+        </div>
+<%end%>
+  </body>
+</html>

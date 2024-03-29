@@ -1,3 +1,19 @@
-// Place all the styles related to the cart_item controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.main_cont
+{
+    border:2px solid black;
+    border-radius:5px;
+    margin: 30px;
+    padding-left:10%;
+    width:700px;
+    display:flex;
+    align-items: center; 
+    justify-content: space-between;
+    margin-left:27%;
+    
+}
+.main_cont .cont{
+    width:50%
+}
+.main_cont .btn{
+    margin-left: auto; 
+}
