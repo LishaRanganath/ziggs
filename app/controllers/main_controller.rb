@@ -1,6 +1,6 @@
 class MainController < ApplicationController
   def index
-    @restaurant_all=Restaurant.all
+    @restaurant_all=Restaurant.all.paginate(page: params[:page])
   end
   #creating a variable for the common form so that we know which model is being accessed
   def new
@@ -12,6 +12,20 @@ class MainController < ApplicationController
       redirect_to root_path, notice: "Restaurant added successfully"
     else
       render :new
+    end
+  end
+
+  #for updating
+  def edit
+        @resto=Restaurant.find_by(id: params[:id])
+  end
+
+  def update
+    updater = Main::RestaurantUpdater.new(params[:id],restaurant_params)
+    if updater.update
+      redirect_to root_path, notice: "Restaurant updated successfully"
+    else
+      redirect_to root_path, notice: "Restaurant could not be updated"
     end
   end
   #for destroying
@@ -28,6 +42,6 @@ class MainController < ApplicationController
   #private methods
   private
   def restaurant_params
-    params.require(:restaurant).permit(:name, :email, :phno,:restaurant_image)
+    params.require(:restaurant).permit(:name, :email, :phno,:image)
   end
 end

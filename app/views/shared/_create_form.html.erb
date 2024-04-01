@@ -1,8 +1,9 @@
-<%= form_for(@resource, url: {controller: 'main', action: 'create'})  do |form| %>
+<%= form_for(resource, url: (@resource.is_a?(MenuItem) ? {controller: 'menu_item', action: 'create'} : {controller: 'main', action: 'create'})) do |form| %>
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
+  
   <% if @resource.is_a?(Restaurant) %>
     <div class="field">
         <%= form.label :email %>
@@ -12,17 +13,17 @@
         <%= form.label :phno %>
         <%= form.text_field :phno %>
     </div>
-    <div class="field">
-        <%= form.label :restaurant_image %>
-        <%= form.file_field :restaurant_image %>
-    </div>
+    
   <%end%>
   <%if @resource.is_a?(MenuItem)%>
      <div class="field">
         <%= form.label :item_price %>
         <%= form.text_field :item_price %>
     </div>
-
   <%end%>
+  <div class="field">
+        <%= form.label :image %>
+        <%= form.file_field :image %>
+    </div>
   <%= form.submit %>
 <% end %>

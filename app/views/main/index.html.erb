@@ -9,39 +9,65 @@
 
     <%@restaurant_all.each do |resto|%>
         <div class="main_cont">
-            <div class="cont">
-                 <% if resto.restaurant_image.present? %>
-                     <%=image_tag url_for(resto.restaurant_image)%>
+        <div class="image">
+                 <% if resto.image.present? %>
+                     <%=image_tag url_for(resto.image),style:"height:120px;width:120px;"%>
                  <% else %>
                     <p>No image available</p>
                  <% end %>
+                 </div> 
+            <div class="cont">
                 <p>Name:<%=resto.name%></p>
                 <p>Email:<%=resto.email%></p>
                 <p>Phone Number:<%=resto.phno%></p>
             </div>
             <div class="btn">
-                    <%= button_to "Select",menu_item_path, params:{id: resto.id}, method: :get,class:"btn_in"%>
-                    <%= button_to "Edit",root_path,class:"btn_in"%>
+                    <%= button_to "Select",menu_item_path(resto), method: :get,class:"btn_in"%>
+                    <%= button_to "Edit", edit_main_path(resto.id), method: :get, class: "btn_in" %>
                     <%= button_to "Delete",main_path(resto),method: :delete,class:"btn_in"%>
             </div>
            
         </div>
+       
     <%end%>
+     <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @restaurant_all %>
+    </div>
+    <div class="center-a">
+    <%= will_paginate @restaurant_all, :container => false %>
+    <div>
+  </div>
 <%else%>
     <% if user_signed_in?%>
         <h1>hello <%=current_user.username%></h1>
         <%@restaurant_all.each do |resto|%>
-        <div class="main_cont">
+            <div class="main_cont">
+             <div class="image">
+                 <% if resto.image.present? %>
+                     <%=image_tag url_for(resto.image),style:"height:120px;width:120px;"%>
+                 <% else %>
+                    <p>No image available</p>
+                 <% end %>
+              </div> 
             <div class="cont">
                 <p>Name:<%=resto.name%></p>
                 <p>Email:<%=resto.email%></p>
                 <p>Phone Number:<%=resto.phno%></p>
             </div>
             <div class="btn">
-                    <%= button_to "Select",menu_item_path, params:{id: resto.id}, method: :get%>
+                    <%= button_to "Select",menu_item_path(resto), method: :get%>
                 </div>
-        </div>
+            </div>
         <%end%>
+        <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @restaurant_all %>
+    </div>
+    <div class="center-a">
+    <%= will_paginate @restaurant_all, :container => false %>
+    <div>
+  </div>
     <%end%>
 <%end%>
 </body>

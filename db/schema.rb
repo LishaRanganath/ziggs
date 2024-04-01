@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_26_184207) do
+ActiveRecord::Schema.define(version: 2024_03_30_171952) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -64,16 +64,17 @@ ActiveRecord::Schema.define(version: 2024_03_26_184207) do
     t.integer "restaurant_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
     t.index ["restaurant_id"], name: "index_menu_items_on_restaurant_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.bigint "phno"
+    t.integer "phno"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "restaurant_image"
+    t.string "image"
   end
 
   create_table "users", force: :cascade do |t|
