@@ -3,7 +3,6 @@
     border:2px solid black;
     border-radius:5px;
     margin: 30px;
-    padding-left:10%;
     width:700px;
     display:flex;
     align-items: center; 
@@ -15,5 +14,14 @@
     width:50%
 }
 .main_cont .btn{
-    margin-left: auto; 
+    margin-left: auto;     
+}
+.main_cont .btn .btn_in{
+    width:100px;
+    margin-bottom: 10px;
+}
+.main_cont .image{
+    margin-left: auto;
+    padding-right: 10%;
+ 
 }

@@ -9,7 +9,7 @@
 
     <%@restaurant_all.each do |resto|%>
         <div class="main_cont">
-        <div class="image">
+            <div class="image">
                  <% if resto.image.present? %>
                      <%=image_tag url_for(resto.image),style:"height:120px;width:120px;"%>
                  <% else %>
@@ -22,9 +22,9 @@
                 <p>Phone Number:<%=resto.phno%></p>
             </div>
             <div class="btn">
-                    <%= button_to "Select",menu_item_path(resto), method: :get,class:"btn_in"%>
+                    <%= button_to "Select",menu_item_path(resto.id), method: :get,class:"btn_in"%>
                     <%= button_to "Edit", edit_main_path(resto.id), method: :get, class: "btn_in" %>
-                    <%= button_to "Delete",main_path(resto),method: :delete,class:"btn_in"%>
+                    <%= button_to "Delete",main_path(resto.id),method: :delete,class:"btn_in"%>
             </div>
            
         </div>

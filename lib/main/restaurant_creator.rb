@@ -2,15 +2,34 @@ module Main
     class RestaurantCreator
 
       attr_reader :errors
-      def initialize(params, restaurant_class: Restaurant)
+      def initialize(params, restaurant_class = Restaurant)
         @params = params
         @restaurant_class = restaurant_class
       end
 
+      # def create
+      #   restaurant = @restaurant_class.new(restaurant_params)
+      #   if restaurant.save
+      #       restaurant.name
+      #   else
+      #       @errors = restaurant.errors
+      #       # {success: false, errors: course.errors}
+      #       return false
+      #   end
+      #   # @errors = restaurant.errors unless restaurant.save
+
+      # end
+      #
       def create
-        restaurant = @restaurant_class.new(@params)
-        @errors = restaurant.errors unless restaurant.save
-        self
+        restaurant = @restaurant_class.new(restaurant_params)
+        if restaurant.save
+          restaurant.name
+        else
+          # @errors=restaurant.errors
+          false
+        end
+        # self
+        # restaurant.name  # Return the name if save was successful
       end
 
 
@@ -18,10 +37,16 @@ module Main
 
       # end
 
-      # # private
-      # # def delete_restaurant_params
-      # #   params.permit(:id)
-      # # end
+
+      # private
+      # def restaurant_params
+      #   @params[:restaurant]  # Retrieve restaurant attributes directly from @params
+      # end
+      #
+      private
+      def restaurant_params
+        @params.fetch(:restaurant,{}).permit(:name, :email, :phno, :image)
+      end
 
 #     end
   end

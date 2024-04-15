@@ -16,7 +16,8 @@
     
   <%end%>
   <%if @resource.is_a?(MenuItem)%>
-     <div class="field">
+  <%= form.hidden_field :restaurant_id, value: @resto.id if @resto.present? %>
+    <div class="field">
         <%= form.label :item_price %>
         <%= form.text_field :item_price %>
     </div>

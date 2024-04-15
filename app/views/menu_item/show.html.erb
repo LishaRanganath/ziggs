@@ -3,18 +3,28 @@
 <%= stylesheet_link_tag 'menu_item', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-<%= button_to 'Add Menu Item',new_menu_item_path,method: :get%>
+<%= button_to 'Add Menu Item',new_menu_item_path(restaurant_id: @resto.id),method: :get%>
 <% @menus.each do |menu| %>
     <div class="main_cont">
+        <div class="image">
+            <% if menu.image.present? %>
+              <%= image_tag(url_for(menu.image), style: "height:120px;width:120px;") %>
+            <% else %>
+              <p>No image available</p>
+            <% end %>
+        </div> 
         <div class="cont">
-        <p> <%=menu.name%> </p>
-        <p> <%=menu.item_price%> </p>
+            <p><%= menu.name %></p>
+            <p><%= menu.item_price %></p>
         </div>
         <div class="btn">
-            <%= button_to "Add", menu_item_path,params:{menu_item_id: menu.id,restaurant_id: menu.restaurant.id},method: :post%>
+            <%= button_to "Add", menu_item_path, params: { menu_item_id: menu.id, restaurant_id: menu.restaurant.id }, method: :post,class:"btn_in" %>
+            <%= button_to "Edit",menu_item_path,class:"btn_in"%>
+            <%= button_to "Delete",menu_item_path,class:"btn_in"%>
         </div> 
-        </div>
-<%end%>
+    </div>
+<% end %>
+
 <div class="digg_pagination">
     <div class="page_info">
       <%= page_entries_info @menus %>

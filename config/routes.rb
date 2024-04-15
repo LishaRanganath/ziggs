@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :main do
     resources :restaurants
   end
+  get 'menu_item/new/:restaurant_id', to: 'menu_item#new', as: 'new_menu_item'
+  post 'menu_item/create/:restaurant_id', to: 'menu_item#create', as: 'create_menu_item'
   resources :menu_item
 
   get 'profile',to: 'profile#show'
